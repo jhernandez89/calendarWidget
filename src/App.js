@@ -11,6 +11,21 @@ const type = {
 
 const frequency = 7;
 
+const monthsOfTheYear = {
+  january: 1,
+  february: 2,
+  march: 3,
+  april: 4,
+  may: 5,
+  june: 6,
+  july: 7,
+  august: 8,
+  september: 9,
+  october: 10,
+  november: 11,
+  december: 12
+}
+
 const dayOfWeek = {
   sunday: 0,
   monday: 1,
@@ -40,6 +55,7 @@ function App() {
         currentNumberOfHours={currentNumberOfHours}
         hoursToAdd={hoursToAdd}
         dayOfTheMonth={dayOfTheMonth}
+        monthsOfTheYear={monthsOfTheYear}
       />
     </div>
   );
