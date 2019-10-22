@@ -46,23 +46,26 @@ const Accruals = ({
 
 
   const handleMonth = date => {
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const day = [15, 31] // days array will be dynamic
+    const daysSelectedForVacation = [];
+    const vacationDates = () => {
+      let i = 0;
+      if(daysSelectedForVacation.length < day.length) {
+        daysSelectedForVacation.push(new Date(year, month, day[i]));
+        i++;
+      }
+    }
     const daysInMonth = (month, year) => {
       return new Date(year, month, 0).getDate();
     }
-    const month = date.getMonth() + 1;
-    const day = [];
-    const year = date.getFullYear();
-    
 
-    const firstVacationHoursOfTheMonth = Math.floor(daysInMonth(month, year) / 2);//set the month and year to be where the user clicks                              
-    const secondVacationHoursOfTheMonth = daysInMonth(month, year); //set the month and year to be where the user clicks 
-    const selectedDaysToAddHours = [
-      new Date('Oct ' + firstVacationHoursOfTheMonth + ' 2019'),
-      new Date('Oct ' + secondVacationHoursOfTheMonth + ' 2019')
-    ]
-    
-    selectedDaysToAddHours.forEach((day, i) => {
-      if (date.getTime() === selectedDaysToAddHours[i].getTime()) {
+    if (daysSelectedForVacation.length === 0) {
+      vacationDates()
+    }
+    daysSelectedForVacation.forEach((day, i) => {
+      if (date.getTime() === daysSelectedForVacation[i].getTime()) {
         //add hours of vacation 
         console.log(hoursToAdd);
         console.log(month)
