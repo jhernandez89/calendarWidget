@@ -35,8 +35,8 @@ const dayOfWeek = {
   friday: 5,
   saturday: 6
 };
-
-const dayOfTheMonth = 15;
+//dayOfTheMonth needs to be an array
+const dayOfTheMonth = [1];
 
 const hoursToAdd = 8;
 

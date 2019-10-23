@@ -30,11 +30,11 @@ const Accruals = ({
     }
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    const day = [Math.floor(daysInMonth(month, year) / 2), daysInMonth(month, year)]
+    const day = dayOfTheMonth;
     const daysSelectedForVacation = [];
     let i = 0;
     do {
-      daysSelectedForVacation.push(new Date(year, month -1, day[i]));
+      daysSelectedForVacation.push(new Date(year, month -1, day));
       i++;
     } while (daysSelectedForVacation.length < day.length);
 
