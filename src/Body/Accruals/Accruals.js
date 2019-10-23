@@ -24,84 +24,50 @@ const Accruals = ({
   dayOfTheMonth
 }) => {
   const [result, setResult] = useState(0);
-
-  // const handleMonth = date => {
-  //   const today = new Date(Date.now());
-  //   const numberOfMonths = monthsBetween(today, date);
-  //   if (today.getDate() >= dayOfTheMonth) {
-  //     if (date.getDate() >= dayOfTheMonth) {
-  //       return numberOfMonths;
-  //     } else {
-  //       return numberOfMonths - 1;
-  //     }
-  //   } else {
-  //     if (date.getDate() >= dayOfTheMonth) {
-  //       return numberOfMonths + 1;
-  //     } else {
-  //       return numberOfMonths;
-  //     }
-  //   }
-  // };
-
-
-
   const handleMonth = date => {
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    const day = [15, 31] // days array will be dynamic
-    const daysSelectedForVacation = [];
-    const vacationDates = () => {
-      let i = 0;
-      if(daysSelectedForVacation.length < day.length) {
-        daysSelectedForVacation.push(new Date(year, month, day[i]));
-        i++;
-      }
-    }
     const daysInMonth = (month, year) => {
       return new Date(year, month, 0).getDate();
     }
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const day = [Math.floor(daysInMonth(month, year) / 2), daysInMonth(month, year)]
+    const daysSelectedForVacation = [];
+    let i = 0;
+    do {
+      daysSelectedForVacation.push(new Date(year, month -1, day[i]));
+      i++;
+    } while (daysSelectedForVacation.length < day.length);
 
-    if (daysSelectedForVacation.length === 0) {
-      vacationDates()
-    }
-    daysSelectedForVacation.forEach((day, i) => {
-      if (date.getTime() === daysSelectedForVacation[i].getTime()) {
-        //add hours of vacation 
-        console.log(hoursToAdd);
-        console.log(month)
-        console.log(year)
-        console.log(date)
-      }
+    daysSelectedForVacation.forEach(() => {
+      // calculateHours();
+      console.log(hoursToAdd);
     })
+  };
+    const handleChange = date => {
+      switch (true) {
+        case type === 0:
+          // handleDay();
+          break;
+        case type === 1:
+          // handleWeek(date);
+          break;
+        case type === 2:
+          handleMonth(date)
+          break;
+        case type === 3:
+          // handleYear();
+          break;
+        default:
+          console.log("noooo");
+      }
+    };
 
+    return (
+      <div>
+        <Calendar onChange={date => handleChange(date)} />
+        <h3>{result}</h3>
+      </div>
+    );
   };
 
-  const handleChange = date => {
-    switch (true) {
-      case type === 0:
-        // handleDay();
-        break;
-      case type === 1:
-        // handleWeek(date);
-        break;
-      case type === 2:
-        // console.log(moment())
-        handleMonth(date)
-        break;
-      case type === 3:
-        // handleYear();
-        break;
-      default:
-        console.log("noooo");
-    }
-  };
-
-  return (
-    <div>
-      <Calendar onChange={date => handleChange(date)} />
-      <h3>{result}</h3>
-    </div>
-  );
-};
-
-export default Accruals;
+  export default Accruals;
